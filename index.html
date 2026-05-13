@@ -211,10 +211,11 @@
       <p>Three stages, in order:</p>
       <ul>
         <li><strong>Initiate</strong> — kick off from any of 8 input sources</li>
-        <li><strong>Iterate</strong> — run the brainstorm board (v1 → v(n) → wrap)</li>
-        <li><strong>Refine + ship</strong> — deep research per topic batch, then 5 script variants per piece</li>
+        <li><strong>Iterate</strong> — run the brainstorm board (v1 → v(n) → wrap with banked angles list)</li>
+        <li><strong>Refine + ship</strong> — deep research per topic batch, then 5 script variants per piece. The production handoff happens only when scripts are confirmed.</li>
       </ul>
-      <p class="muted">Reference run: SEA brand channel · 4 iterations · 30 banked pieces · production handoff doc shipped.</p>
+      <p class="muted">End of Sparkloop = scripts confirmed. Everything after that is production.</p>
+      <p class="muted">Reference run: SEA brand channel · 4 iterations · 30 banked pieces · research + scripts pending.</p>
     </section>
 
     <!-- 02 -->
@@ -228,8 +229,8 @@
           <!-- column labels -->
           <text class="col-label" x="60" y="22">INITIATORS</text>
           <text class="col-label" x="290" y="22">ITERATION</text>
-          <text class="col-label" x="500" y="22">REFINEMENT</text>
-          <text class="col-label" x="640" y="22">OUTPUT</text>
+          <text class="col-label" x="470" y="22">REFINEMENT</text>
+          <text class="col-label" x="600" y="22">OUTPUT</text>
 
           <!-- 8 input dots -->
           <g>
@@ -264,36 +265,39 @@
           </g>
 
           <!-- /spark_idea box -->
-          <rect class="stroke" x="270" y="155" width="160" height="90" rx="6"/>
-          <text class="stage-label" x="350" y="190" text-anchor="middle">/spark_idea</text>
-          <text class="label-sub" x="350" y="208" text-anchor="middle">brainstorm + iterate</text>
-          <text class="label-sub" x="350" y="224" text-anchor="middle">v1 → v(n) → wrap</text>
+          <rect class="stroke" x="270" y="155" width="140" height="90" rx="6"/>
+          <text class="stage-label" x="340" y="190" text-anchor="middle">/spark_idea</text>
+          <text class="label-sub" x="340" y="208" text-anchor="middle">brainstorm + iterate</text>
+          <text class="label-sub" x="340" y="224" text-anchor="middle">v1 → v(n) → wrap</text>
 
           <!-- arrow from spark_idea to spark_listen -->
-          <line class="stroke" x1="430" y1="200" x2="475" y2="200"/>
-          <polygon points="475,195 485,200 475,205" fill="#111"/>
+          <line class="stroke" x1="410" y1="200" x2="450" y2="200"/>
+          <polygon points="450,195 460,200 450,205" fill="#111"/>
 
           <!-- /spark_listen box -->
-          <rect class="stroke" x="485" y="170" width="120" height="60" rx="6"/>
-          <text class="stage-label" x="545" y="195" text-anchor="middle">/spark_listen</text>
-          <text class="label-sub" x="545" y="212" text-anchor="middle">deep research</text>
+          <rect class="stroke" x="460" y="170" width="120" height="60" rx="6"/>
+          <text class="stage-label" x="520" y="195" text-anchor="middle">/spark_listen</text>
+          <text class="label-sub" x="520" y="212" text-anchor="middle">deep research</text>
 
           <!-- arrow from spark_listen to spark_script -->
-          <line class="stroke" x1="605" y1="200" x2="620" y2="200"/>
-          <polygon points="620,195 630,200 620,205" fill="#111"/>
+          <line class="stroke" x1="580" y1="200" x2="595" y2="200"/>
+          <polygon points="595,195 605,200 595,205" fill="#111"/>
 
           <!-- /spark_script box -->
-          <rect class="stroke" x="630" y="170" width="80" height="60" rx="6"/>
-          <text class="stage-label" x="670" y="195" text-anchor="middle">/spark_script</text>
-          <text class="label-sub" x="670" y="212" text-anchor="middle">5 variants</text>
+          <rect class="stroke" x="605" y="170" width="105" height="60" rx="6"/>
+          <text class="stage-label" x="657" y="195" text-anchor="middle">/spark_script</text>
+          <text class="label-sub" x="657" y="212" text-anchor="middle">5 variants</text>
 
-          <!-- arrow down to production -->
-          <line class="stroke" x1="350" y1="245" x2="350" y2="380"/>
-          <polygon points="345,380 350,390 355,380" fill="#111"/>
+          <!-- arrow down from /spark_script to production handoff -->
+          <line class="stroke" x1="657" y1="232" x2="657" y2="380"/>
+          <polygon points="652,380 657,390 662,380" fill="#111"/>
 
-          <!-- production handoff -->
-          <rect class="stroke" x="240" y="395" width="220" height="44" rx="6"/>
-          <text class="stage-label" x="350" y="421" text-anchor="middle">Production handoff doc</text>
+          <!-- production handoff (at end of /spark_script, not /spark_idea) -->
+          <rect class="stroke" x="540" y="395" width="170" height="44" rx="6"/>
+          <text class="stage-label" x="625" y="421" text-anchor="middle">Production handoff</text>
+
+          <!-- caption under handoff -->
+          <text class="label-sub" x="625" y="453" text-anchor="middle">End of Sparkloop. Production owns from here.</text>
         </svg>
       </div>
 
@@ -399,9 +403,12 @@
       <h3>The loop</h3>
       <p>Generated prompt at the bottom of the page auto-builds based on selections. Copy, paste back to the chat, AI generates v(n+1): rewrites cards per your notes, generates 5 new derivatives per "find more" flag, drops stale signals, banks finalised picks. Repeat until banked outweighs iterating, then wrap.</p>
 
+      <h3>What wrap produces</h3>
+      <p>Wrap of <span class="skill-name">/spark_idea</span> produces a <strong>banked angles brief</strong> — the list of locked-in pieces with their format, talent, bilingual flag, and shortlist reasoning. This is an interim deliverable. It feeds <span class="skill-name">/spark_listen</span> and <span class="skill-name">/spark_script</span>. <strong>It is not the production handoff.</strong></p>
+
       <div class="callout">
         <div class="callout-label">Reference run</div>
-        <p>SEA brand channel. 4 iterations (v1 → v4). Started with 20 angles. Ended with 30 banked pieces (2 long-form anchors, 27 short-form reels, 1 KOL angle). Production handoff doc generated on wrap.</p>
+        <p>SEA brand channel. 4 iterations (v1 → v4). Started with 20 angles. Ended with 30 banked pieces (2 long-form anchors, 27 short-form reels, 1 KOL angle). Banked-angles brief shipped. Research and scripts pending; production handoff happens only after scripts confirm.</p>
       </div>
     </section>
 
@@ -434,6 +441,9 @@
       </ul>
 
       <p>Hands off to <span class="skill-name">/wf_yt_script</span>, <span class="skill-name">/new_reel_scripts_x5_v1</span>, and <span class="skill-name">/wf_quick_reel</span> for final voiceover-ready scripts.</p>
+
+      <h3>End of Sparkloop</h3>
+      <p>When scripts are confirmed, <span class="skill-name">/spark_script</span> produces the <strong>production handoff doc</strong>. That is the terminal deliverable of Sparkloop. Talent booking, studio scheduling, calendar slotting, and posting all happen downstream and outside Sparkloop.</p>
     </section>
 
     <!-- 07 -->
