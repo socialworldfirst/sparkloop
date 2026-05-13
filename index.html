@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sparkloop — WorldFirst content engine</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --fg: #111;
+    --fg-muted: #5b5b5b;
+    --fg-soft: #888;
+    --bg: #fafafa;
+    --bg-paper: #ffffff;
+    --hairline: rgba(0,0,0,0.09);
+    --hairline-soft: rgba(0,0,0,0.05);
+    --accent: #1a1a1a;
+    --dot: #0a6d2f;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 24px 120px;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    display: none;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  .hero { padding-bottom: 36px; border-bottom: 1px solid var(--hairline); margin-bottom: 56px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-soft); margin-bottom: 14px; }
+  .hero h1 { font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 16px; color: var(--fg); }
+  .lede { font-size: 18px; line-height: 1.5; color: var(--fg-muted); max-width: 620px; margin: 0 0 22px; font-weight: 400; }
+  .meta { display: flex; flex-wrap: wrap; gap: 16px 28px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-soft); }
+  .meta span { display: inline-block; }
+  .meta span + span::before { content: ''; }
+
+  /* SECTIONS */
+  section { padding: 48px 0; border-top: 1px solid var(--hairline); position: relative; }
+  section:first-of-type { border-top: none; padding-top: 8px; }
+  section .num {
+    position: absolute;
+    top: 48px;
+    left: -64px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg-soft);
+    letter-spacing: 0.06em;
+  }
+  section h2 {
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    color: var(--fg);
+  }
+  section h2 .num-inline {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-soft);
+    margin-right: 14px;
+    vertical-align: middle;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    font-weight: 500;
+  }
+  section h3 { font-size: 15px; font-weight: 600; margin: 24px 0 8px; color: var(--fg); }
+  section p { margin: 0 0 14px; color: var(--fg); }
+  section p.muted { color: var(--fg-muted); }
+  section ul { padding-left: 20px; margin: 0 0 14px; }
+  section li { margin-bottom: 6px; color: var(--fg); }
+
+  /* INLINE ACCENTS */
+  .mono { font-family: var(--mono); font-size: 13px; }
+  .skill-name { font-family: var(--mono); font-size: 13px; color: var(--fg); background: rgba(0,0,0,0.04); padding: 1px 6px; border-radius: 3px; }
+  .dot-accent { display: inline-block; width: 6px; height: 6px; background: var(--dot); border-radius: 100px; vertical-align: middle; margin-right: 8px; }
+
+  /* INITIATOR LIST */
+  .initiators { margin: 28px 0 14px; }
+  .initiator { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid var(--hairline-soft); }
+  .initiator:first-child { border-top: none; padding-top: 0; }
+  .initiator-num { font-family: var(--mono); font-size: 12px; color: var(--fg-soft); padding-top: 2px; letter-spacing: 0.05em; }
+  .initiator-body { min-width: 0; }
+  .initiator-name { font-size: 16px; font-weight: 600; margin: 0 0 4px; color: var(--fg); }
+  .initiator-skill { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); margin-bottom: 8px; }
+  .initiator-desc { font-size: 14px; color: var(--fg-muted); line-height: 1.55; margin: 0; }
+  .initiator-status { display: inline-block; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-soft); margin-left: 8px; }
+
+  /* FLOW DIAGRAM */
+  .diagram-wrap {
+    margin: 20px 0 36px;
+    padding: 28px 18px;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    background: var(--bg-paper);
+    overflow-x: auto;
+  }
+  .diagram { display: block; width: 100%; height: auto; max-width: 720px; margin: 0 auto; }
+  .diagram text { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; }
+  .diagram .label { font-size: 11px; fill: var(--fg); font-weight: 500; }
+  .diagram .label-sub { font-size: 9px; fill: var(--fg-soft); font-family: var(--mono); letter-spacing: 0.05em; }
+  .diagram .stage-label { font-size: 13px; fill: var(--fg); font-weight: 600; }
+  .diagram .col-label { font-size: 10px; fill: var(--fg-soft); font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .diagram .stroke { stroke: var(--fg); fill: none; stroke-width: 1; }
+  .diagram .stroke-soft { stroke: var(--hairline); fill: none; stroke-width: 1; }
+  .diagram .dot { fill: var(--dot); }
+
+  /* TABLE / STATUS GRID */
+  .status-grid { margin: 22px 0; border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+  .status-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .status-row + .status-row { border-top: 1px solid var(--hairline-soft); }
+  .status-cell { padding: 14px 18px; }
+  .status-cell + .status-cell { border-left: 1px solid var(--hairline-soft); }
+  .status-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-soft); margin-bottom: 6px; }
+  .status-skill { font-family: var(--mono); font-size: 13px; color: var(--fg); }
+  .status-detail { font-size: 12px; color: var(--fg-muted); margin-top: 2px; }
+
+  /* CALLOUTS */
+  .callout { padding: 18px 20px; border: 1px solid var(--hairline); border-radius: 8px; background: var(--bg-paper); margin: 22px 0; }
+  .callout-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-soft); margin-bottom: 8px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* FOOT */
+  .foot { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--hairline); font-family: var(--mono); font-size: 11px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+  .foot p { margin: 4px 0; }
+
+  /* LAYOUT — sidebar + content for desktop */
+  @media (min-width: 980px) {
+    .layout { grid-template-columns: 220px 1fr; gap: 60px; padding-top: 56px; padding-bottom: 160px; }
+    .sidebar { display: block; position: sticky; top: 56px; align-self: start; padding-top: 6px; }
+    .sidebar-brand { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--hairline); }
+    .sidebar-brand-sub { display: block; color: var(--fg-soft); margin-top: 4px; font-weight: 400; letter-spacing: 0.04em; }
+    .toc { display: flex; flex-direction: column; gap: 4px; }
+    .toc a { color: var(--fg-soft); text-decoration: none; font-size: 13px; padding: 5px 0 5px 14px; border-left: 2px solid transparent; line-height: 1.4; transition: color 0.15s, border-color 0.15s; }
+    .toc a span.toc-num { font-family: var(--mono); font-size: 11px; color: var(--fg-soft); margin-right: 8px; letter-spacing: 0.05em; }
+    .toc a:hover { color: var(--fg); }
+    .toc a.active { color: var(--fg); border-left-color: var(--fg); }
+    .toc a.active span.toc-num { color: var(--fg); }
+    .content { max-width: 720px; margin: 0; }
+    section .num { left: -56px; }
+    section h2 .num-inline { display: none; }
+    .hero h1 { font-size: 48px; }
+  }
+  @media (min-width: 1240px) {
+    .layout { grid-template-columns: 240px 1fr; gap: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      Sparkloop
+      <span class="sidebar-brand-sub">v1 · 2026-05-13</span>
+    </div>
+    <nav class="toc" id="toc">
+      <a href="#what"><span class="toc-num">01</span>What it is</a>
+      <a href="#flow"><span class="toc-num">02</span>The flow</a>
+      <a href="#initiators"><span class="toc-num">03</span>The 8 initiators</a>
+      <a href="#idea"><span class="toc-num">04</span>Spark_idea</a>
+      <a href="#listen"><span class="toc-num">05</span>Spark_listen</a>
+      <a href="#script"><span class="toc-num">06</span>Spark_script</a>
+      <a href="#not"><span class="toc-num">07</span>What it isn't</a>
+      <a href="#build"><span class="toc-num">08</span>Build status</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+
+    <header class="hero">
+      <div class="eyebrow">Content engine · upstream</div>
+      <h1>Sparkloop</h1>
+      <p class="lede">The end-to-end flow for turning audience signals, artefacts, and performance data into production-ready content angles + scripts.</p>
+      <div class="meta">
+        <span>WorldFirst social</span>
+        <span>v1 · 2026-05-13</span>
+        <span>Reference run · SEA brand channel</span>
+      </div>
+    </header>
+
+    <!-- 01 -->
+    <section id="what">
+      <div class="num">01</div>
+      <h2><span class="num-inline">01</span>What Sparkloop is</h2>
+      <p>Sparkloop is the upstream content engine. It takes signals from the world (or our own data), runs them through human + AI iteration, and outputs ready-to-script content angles plus production briefs.</p>
+      <p>Three stages, in order:</p>
+      <ul>
+        <li><strong>Initiate</strong> — kick off from any of 8 input sources</li>
+        <li><strong>Iterate</strong> — run the brainstorm board (v1 → v(n) → wrap)</li>
+        <li><strong>Refine + ship</strong> — deep research per topic batch, then 5 script variants per piece</li>
+      </ul>
+      <p class="muted">Reference run: SEA brand channel · 4 iterations · 30 banked pieces · production handoff doc shipped.</p>
+    </section>
+
+    <!-- 02 -->
+    <section id="flow">
+      <div class="num">02</div>
+      <h2><span class="num-inline">02</span>The flow at a glance</h2>
+      <p>Eight initiators feed into <span class="skill-name">/spark_idea</span>. Iteration runs until banked outweighs iterating. Wrap hands off to <span class="skill-name">/spark_listen</span> for topical research, then to <span class="skill-name">/spark_script</span> for production-ready scripts.</p>
+
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg">
+          <!-- column labels -->
+          <text class="col-label" x="60" y="22">INITIATORS</text>
+          <text class="col-label" x="290" y="22">ITERATION</text>
+          <text class="col-label" x="500" y="22">REFINEMENT</text>
+          <text class="col-label" x="640" y="22">OUTPUT</text>
+
+          <!-- 8 input dots -->
+          <g>
+            <circle class="dot" cx="40" cy="60" r="4"/>
+            <text class="label" x="56" y="64">01 Drop artefact</text>
+            <circle class="dot" cx="40" cy="100" r="4"/>
+            <text class="label" x="56" y="104">02 Viral talking points</text>
+            <circle class="dot" cx="40" cy="140" r="4"/>
+            <text class="label" x="56" y="144">03 Monthly social listen</text>
+            <circle class="dot" cx="40" cy="180" r="4"/>
+            <text class="label" x="56" y="184">04 Session + handoff scan</text>
+            <circle class="dot" cx="40" cy="220" r="4"/>
+            <text class="label" x="56" y="224">05 Performance-driven</text>
+            <circle class="dot" cx="40" cy="260" r="4"/>
+            <text class="label" x="56" y="264">06 Audience-anchored</text>
+            <circle class="dot" cx="40" cy="300" r="4"/>
+            <text class="label" x="56" y="304">07 Product / feature artefact</text>
+            <circle class="dot" cx="40" cy="340" r="4"/>
+            <text class="label" x="56" y="344">08 Industry pulse</text>
+          </g>
+
+          <!-- converging lines from inputs to /spark_idea -->
+          <g class="stroke-soft">
+            <path d="M210 60 Q 240 60 270 180" />
+            <path d="M210 100 Q 240 100 270 185" />
+            <path d="M210 140 Q 240 140 270 190" />
+            <path d="M210 180 Q 240 180 270 195" />
+            <path d="M210 220 Q 240 220 270 200" />
+            <path d="M210 260 Q 240 260 270 205" />
+            <path d="M210 300 Q 240 300 270 210" />
+            <path d="M210 340 Q 240 340 270 215" />
+          </g>
+
+          <!-- /spark_idea box -->
+          <rect class="stroke" x="270" y="155" width="160" height="90" rx="6"/>
+          <text class="stage-label" x="350" y="190" text-anchor="middle">/spark_idea</text>
+          <text class="label-sub" x="350" y="208" text-anchor="middle">brainstorm + iterate</text>
+          <text class="label-sub" x="350" y="224" text-anchor="middle">v1 → v(n) → wrap</text>
+
+          <!-- arrow from spark_idea to spark_listen -->
+          <line class="stroke" x1="430" y1="200" x2="475" y2="200"/>
+          <polygon points="475,195 485,200 475,205" fill="#111"/>
+
+          <!-- /spark_listen box -->
+          <rect class="stroke" x="485" y="170" width="120" height="60" rx="6"/>
+          <text class="stage-label" x="545" y="195" text-anchor="middle">/spark_listen</text>
+          <text class="label-sub" x="545" y="212" text-anchor="middle">deep research</text>
+
+          <!-- arrow from spark_listen to spark_script -->
+          <line class="stroke" x1="605" y1="200" x2="620" y2="200"/>
+          <polygon points="620,195 630,200 620,205" fill="#111"/>
+
+          <!-- /spark_script box -->
+          <rect class="stroke" x="630" y="170" width="80" height="60" rx="6"/>
+          <text class="stage-label" x="670" y="195" text-anchor="middle">/spark_script</text>
+          <text class="label-sub" x="670" y="212" text-anchor="middle">5 variants</text>
+
+          <!-- arrow down to production -->
+          <line class="stroke" x1="350" y1="245" x2="350" y2="380"/>
+          <polygon points="345,380 350,390 355,380" fill="#111"/>
+
+          <!-- production handoff -->
+          <rect class="stroke" x="240" y="395" width="220" height="44" rx="6"/>
+          <text class="stage-label" x="350" y="421" text-anchor="middle">Production handoff doc</text>
+        </svg>
+      </div>
+
+      <p class="muted">Note: most initiators are existing skills. Three are new wrappers or fresh builds. See section 08 for build status.</p>
+    </section>
+
+    <!-- 03 -->
+    <section id="initiators">
+      <div class="num">03</div>
+      <h2><span class="num-inline">03</span>The 8 initiators</h2>
+      <p>Any of these kicks off a Sparkloop run. They all feed the same downstream pipeline (<span class="skill-name">/spark_idea</span> → <span class="skill-name">/spark_listen</span> → <span class="skill-name">/spark_script</span>).</p>
+
+      <div class="initiators">
+
+        <div class="initiator">
+          <div class="initiator-num">01</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Drop artefact</h3>
+            <div class="initiator-skill">/wf_spark · existing</div>
+            <p class="initiator-desc">Drop anything: link, post, screenshot, notes, customer DM, sales feedback, transcript. The most flexible kickoff. Handles customer-voice and competitor-screenshot scenarios.</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">02</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Viral talking points</h3>
+            <div class="initiator-skill">/viral_talking_points · existing</div>
+            <p class="initiator-desc">Research what your target audience is discussing right now on Reddit, X, and forums. Real engagement data, real quotes.</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">03</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Monthly social listen</h3>
+            <div class="initiator-skill">/wf_monthly_listen · existing</div>
+            <p class="initiator-desc">Broader 90-day landscape scan across Reddit, X, Google Trends, TikTok, YouTube. Useful when you want the bigger picture rather than a single audience pulse.</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">04</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Session + handoff scan</h3>
+            <div class="initiator-skill">/spark_scan · existing</div>
+            <p class="initiator-desc">Mine prior Claude sessions and handoff docs for unspent ideas over a configurable window. Cheap and fast: surface what we already produced but haven't acted on.</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">05</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Performance-driven</h3>
+            <div class="initiator-skill">/spark_from_perf · planned wrapper around /watched + /boosted</div>
+            <p class="initiator-desc">Find what shipped in the last 90 days that over-performed, then spark variations on the winning patterns. Wraps existing performance data so the prompt input is "give me more like the winners."</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">06</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Audience-anchored</h3>
+            <div class="initiator-skill">/spark_audience · new</div>
+            <p class="initiator-desc">Pick one of the 4 primary WF audiences (operator_importer, operator_ecom, freelancer, 1688_buyer) and spark strictly for that audience's jobs-to-be-done. Different from viral talking points: that's "what they're saying"; this is "what we should be saying based on our audience research."</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">07</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Product / feature artefact</h3>
+            <div class="initiator-skill">/spark_product · wrapper around /wf_content_foundation</div>
+            <p class="initiator-desc">Drop a PRD excerpt, demo notes, feature launch announcement, or product team input. Routes through the existing content foundation skill, then into spark_idea for angle generation.</p>
+          </div>
+        </div>
+
+        <div class="initiator">
+          <div class="initiator-num">08</div>
+          <div class="initiator-body">
+            <h3 class="initiator-name">Industry pulse</h3>
+            <div class="initiator-skill">/spark_pulse · new</div>
+            <p class="initiator-desc">Payments and fintech-adjacent trends, filtered for what WorldFirst could plausibly speak to. Cross-border SME payments, supplier-side payment infra, AML/regulatory shifts, marketplace payout mechanics. Excludes generic competitor news (Wise IPO, Stripe acquires X) that doesn't translate into social.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="idea">
+      <div class="num">04</div>
+      <h2><span class="num-inline">04</span>Spark_idea — the brainstorm loop</h2>
+      <p>The iteration heart. Mobile-first HTML board generated per topic. v1 produces 20-30 angle candidates organised by pillar. The user ticks formats, comments per card, and flags "find more angles like this." Auto-categorisation sorts cards into three states.</p>
+
+      <h3>Three states, auto-assigned</h3>
+      <ul>
+        <li><strong>Banked</strong> — format ticked, no further notes. Locked in for production.</li>
+        <li><strong>Iterating</strong> — has a comment or a "find more" flag, or no format ticked yet but engaged. Still shaping.</li>
+        <li><strong>Archived</strong> — no engagement at all. Set aside.</li>
+      </ul>
+
+      <h3>The loop</h3>
+      <p>Generated prompt at the bottom of the page auto-builds based on selections. Copy, paste back to the chat, AI generates v(n+1): rewrites cards per your notes, generates 5 new derivatives per "find more" flag, drops stale signals, banks finalised picks. Repeat until banked outweighs iterating, then wrap.</p>
+
+      <div class="callout">
+        <div class="callout-label">Reference run</div>
+        <p>SEA brand channel. 4 iterations (v1 → v4). Started with 20 angles. Ended with 30 banked pieces (2 long-form anchors, 27 short-form reels, 1 KOL angle). Production handoff doc generated on wrap.</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="listen">
+      <div class="num">05</div>
+      <h2><span class="num-inline">05</span>Spark_listen — deep research</h2>
+      <p>After wrap, before scripts. Bridge skill between angle pick and script writing. Built on <span class="skill-name">/wf_focused_listen</span>.</p>
+
+      <h3>Batching strategy</h3>
+      <p>Running deep research 30 times for 30 angles is wasteful. The angles cluster naturally into 6-8 research themes. One <span class="skill-name">/spark_listen</span> run per theme produces one structured brief that feeds 3-9 angles.</p>
+
+      <p class="muted">Example (SEA batch): 30 angles clustered into 7 themes — CNY rails, FX margin, wire rejection, paying-in-CNY economics, personal-vs-business tools, WF product mechanics, switch-point math. Seven research runs, not thirty.</p>
+
+      <h3>Output</h3>
+      <p>One brief per theme. Statistics, case studies, authority quotes, real-world examples. Feeds <span class="skill-name">/spark_script</span> with the evidence-base it needs to write scripts that ground in facts rather than fabricated framing.</p>
+    </section>
+
+    <!-- 06 -->
+    <section id="script">
+      <div class="num">06</div>
+      <h2><span class="num-inline">06</span>Spark_script — script generation</h2>
+      <p>Future stage. For each banked piece, produces five distinct script variants. The page shows variant 1 by default; a dropdown reveals variants 2-5 for alternatives.</p>
+
+      <h3>Variants vary by format</h3>
+      <ul>
+        <li><strong>Long-form</strong> — 5 structural directions (sequential, problem-led, day-in-life, cost-decomposition, question-led)</li>
+        <li><strong>Short-form</strong> — 5 hook + body combinations using different psychological levers</li>
+        <li><strong>KOL angle</strong> — 5 distribution framings (standalone math, co-branded carousel, native deep dive, customer conversation, LinkedIn longform)</li>
+      </ul>
+
+      <p>Hands off to <span class="skill-name">/wf_yt_script</span>, <span class="skill-name">/new_reel_scripts_x5_v1</span>, and <span class="skill-name">/wf_quick_reel</span> for final voiceover-ready scripts.</p>
+    </section>
+
+    <!-- 07 -->
+    <section id="not">
+      <div class="num">07</div>
+      <h2><span class="num-inline">07</span>What Sparkloop isn't</h2>
+      <p>Sparkloop is the angle-discovery and selection layer. Everything downstream is a separate skill.</p>
+      <ul>
+        <li>Doesn't write final voiceover scripts — handoff to <span class="skill-name">/wf_yt_script</span>, <span class="skill-name">/new_reel_scripts_x5_v1</span>, <span class="skill-name">/wf_quick_reel</span></li>
+        <li>Doesn't book talent — manual outreach drafted via <span class="skill-name">/email</span> / <span class="skill-name">/reply</span></li>
+        <li>Doesn't book studio time</li>
+        <li>Doesn't manage the publishing calendar — <span class="skill-name">/cal_add</span> / <span class="skill-name">/cal_update</span></li>
+        <li>Doesn't push to social channels — <span class="skill-name">/posting</span></li>
+        <li>Doesn't run paid amplification — <span class="skill-name">/boosted</span> or the Meta Ads MCP</li>
+      </ul>
+      <p class="muted">The output of Sparkloop is locked-in angles and script variants. Production owns the rest.</p>
+    </section>
+
+    <!-- 08 -->
+    <section id="build">
+      <div class="num">08</div>
+      <h2><span class="num-inline">08</span>Build status</h2>
+
+      <h3>Existing skills (plug in as-is)</h3>
+      <div class="status-grid">
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Initiator 01</div>
+            <div class="status-skill">/wf_spark</div>
+            <div class="status-detail">Drop any artefact</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Initiator 02</div>
+            <div class="status-skill">/viral_talking_points</div>
+            <div class="status-detail">Audience pulse on Reddit + X</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Initiator 03</div>
+            <div class="status-skill">/wf_monthly_listen</div>
+            <div class="status-detail">90-day landscape</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Initiator 04</div>
+            <div class="status-skill">/spark_scan</div>
+            <div class="status-detail">Mine prior sessions</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Brainstorm loop</div>
+            <div class="status-skill">/spark</div>
+            <div class="status-detail">Built. Reference: SEA v4</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Deep research</div>
+            <div class="status-skill">/wf_focused_listen</div>
+            <div class="status-detail">Wrap as /spark_listen</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Wrappers to build</h3>
+      <div class="status-grid">
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Initiator 05</div>
+            <div class="status-skill">/spark_from_perf</div>
+            <div class="status-detail">Wraps /watched + /boosted</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Initiator 07</div>
+            <div class="status-skill">/spark_product</div>
+            <div class="status-detail">Wraps /wf_content_foundation</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>New skills to build</h3>
+      <div class="status-grid">
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Initiator 06</div>
+            <div class="status-skill">/spark_audience</div>
+            <div class="status-detail">Audience-anchored spark</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Initiator 08</div>
+            <div class="status-skill">/spark_pulse</div>
+            <div class="status-detail">Fintech-adjacent industry listen</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Refinement</div>
+            <div class="status-skill">/spark_listen</div>
+            <div class="status-detail">Rename + scope /wf_focused_listen for the family</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Output</div>
+            <div class="status-skill">/spark_script</div>
+            <div class="status-detail">5 variants per piece</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>Sparkloop · v1 documentation · WorldFirst social</p>
+      <p>Last updated 2026-05-13 · Steven Chen</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Scrollspy
+  const links = Array.from(document.querySelectorAll('.toc a'));
+  const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function onScroll() {
+    let active = sections[0];
+    const top = window.scrollY + 120;
+    sections.forEach(s => { if (s.offsetTop <= top) active = s; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+
+</body>
+</html>
