@@ -181,7 +181,7 @@
     <nav class="toc" id="toc">
       <a href="#what"><span class="toc-num">01</span>What it is</a>
       <a href="#flow"><span class="toc-num">02</span>The flow</a>
-      <a href="#initiators"><span class="toc-num">03</span>The 8 initiators</a>
+      <a href="#initiators"><span class="toc-num">03</span>Initiators</a>
       <a href="#idea"><span class="toc-num">04</span>Spark_idea</a>
       <a href="#listen"><span class="toc-num">05</span>Spark_listen</a>
       <a href="#script"><span class="toc-num">06</span>Spark_script</a>
@@ -222,82 +222,87 @@
     <section id="flow">
       <div class="num">02</div>
       <h2><span class="num-inline">02</span>The flow at a glance</h2>
-      <p>Eight initiators feed into <span class="skill-name">/spark_idea</span>. Iteration runs until banked outweighs iterating. Wrap hands off to <span class="skill-name">/spark_listen</span> for topical research, then to <span class="skill-name">/spark_script</span> for production-ready scripts.</p>
+      <p>Four entry skills feed into <span class="skill-name">/spark_idea</span>. Three are manual; one (<span class="skill-name">/spark_scan</span>) is an automated radar that fans out across five signal sources. Iteration runs until banked outweighs iterating. Wrap hands off to <span class="skill-name">/spark_listen</span> for topical research, then to <span class="skill-name">/spark_script</span> for production-ready scripts.</p>
 
       <div class="diagram-wrap">
-        <svg class="diagram" viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg">
+        <svg class="diagram" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
           <!-- column labels -->
-          <text class="col-label" x="60" y="22">INITIATORS</text>
+          <text class="col-label" x="60" y="22">ENTRY POINTS</text>
           <text class="col-label" x="290" y="22">ITERATION</text>
           <text class="col-label" x="470" y="22">REFINEMENT</text>
           <text class="col-label" x="600" y="22">OUTPUT</text>
 
-          <!-- 8 input dots -->
+          <!-- 3 manual entry points (top) -->
           <g>
             <circle class="dot" cx="40" cy="60" r="4"/>
             <text class="label" x="56" y="64">01 Drop artefact</text>
-            <circle class="dot" cx="40" cy="100" r="4"/>
-            <text class="label" x="56" y="104">02 Viral talking points</text>
-            <circle class="dot" cx="40" cy="140" r="4"/>
-            <text class="label" x="56" y="144">03 Monthly social listen</text>
-            <circle class="dot" cx="40" cy="180" r="4"/>
-            <text class="label" x="56" y="184">04 Session + handoff scan</text>
-            <circle class="dot" cx="40" cy="220" r="4"/>
-            <text class="label" x="56" y="224">05 Performance-driven</text>
-            <circle class="dot" cx="40" cy="260" r="4"/>
-            <text class="label" x="56" y="264">06 Audience-anchored</text>
-            <circle class="dot" cx="40" cy="300" r="4"/>
-            <text class="label" x="56" y="304">07 Product / feature artefact</text>
-            <circle class="dot" cx="40" cy="340" r="4"/>
-            <text class="label" x="56" y="344">08 Industry pulse</text>
+            <text class="label-sub" x="56" y="78">/wf_spark</text>
+
+            <circle class="dot" cx="40" cy="105" r="4"/>
+            <text class="label" x="56" y="109">02 Audience-anchored</text>
+            <text class="label-sub" x="56" y="123">/spark_audience</text>
+
+            <circle class="dot" cx="40" cy="150" r="4"/>
+            <text class="label" x="56" y="154">03 Product / feature artefact</text>
+            <text class="label-sub" x="56" y="168">/spark_product</text>
           </g>
 
-          <!-- converging lines from inputs to /spark_idea -->
+          <!-- /spark_scan radar box with 5 sub-sources -->
+          <rect class="stroke" x="20" y="210" width="200" height="170" rx="6"/>
+          <text class="stage-label" x="120" y="232" text-anchor="middle">04 /spark_scan</text>
+          <text class="label-sub" x="120" y="247" text-anchor="middle">automated radar</text>
+          <line class="stroke-soft" x1="34" y1="258" x2="206" y2="258"/>
+
+          <circle class="dot" cx="38" cy="278" r="3"/>
+          <text class="label" x="50" y="281" style="font-size: 10px;">Viral talking points</text>
+          <circle class="dot" cx="38" cy="298" r="3"/>
+          <text class="label" x="50" y="301" style="font-size: 10px;">Monthly social listen</text>
+          <circle class="dot" cx="38" cy="318" r="3"/>
+          <text class="label" x="50" y="321" style="font-size: 10px;">Session + handoff scan</text>
+          <circle class="dot" cx="38" cy="338" r="3"/>
+          <text class="label" x="50" y="341" style="font-size: 10px;">Performance-driven</text>
+          <circle class="dot" cx="38" cy="358" r="3"/>
+          <text class="label" x="50" y="361" style="font-size: 10px;">Industry pulse</text>
+
+          <!-- converging lines from entry points to /spark_idea -->
           <g class="stroke-soft">
-            <path d="M210 60 Q 240 60 270 180" />
-            <path d="M210 100 Q 240 100 270 185" />
-            <path d="M210 140 Q 240 140 270 190" />
-            <path d="M210 180 Q 240 180 270 195" />
-            <path d="M210 220 Q 240 220 270 200" />
-            <path d="M210 260 Q 240 260 270 205" />
-            <path d="M210 300 Q 240 300 270 210" />
-            <path d="M210 340 Q 240 340 270 215" />
+            <path d="M210 60 Q 240 60 270 270" />
+            <path d="M210 105 Q 240 105 270 275" />
+            <path d="M210 150 Q 240 150 270 280" />
+            <path d="M220 295 Q 250 295 270 290" />
           </g>
 
           <!-- /spark_idea box -->
-          <rect class="stroke" x="270" y="155" width="140" height="90" rx="6"/>
-          <text class="stage-label" x="340" y="190" text-anchor="middle">/spark_idea</text>
-          <text class="label-sub" x="340" y="208" text-anchor="middle">brainstorm + iterate</text>
-          <text class="label-sub" x="340" y="224" text-anchor="middle">v1 → v(n) → wrap</text>
+          <rect class="stroke" x="270" y="245" width="140" height="90" rx="6"/>
+          <text class="stage-label" x="340" y="280" text-anchor="middle">/spark_idea</text>
+          <text class="label-sub" x="340" y="298" text-anchor="middle">brainstorm + iterate</text>
+          <text class="label-sub" x="340" y="314" text-anchor="middle">v1 → v(n) → wrap</text>
 
           <!-- arrow from spark_idea to spark_listen -->
-          <line class="stroke" x1="410" y1="200" x2="450" y2="200"/>
-          <polygon points="450,195 460,200 450,205" fill="#111"/>
+          <line class="stroke" x1="410" y1="290" x2="450" y2="290"/>
+          <polygon points="450,285 460,290 450,295" fill="#111"/>
 
           <!-- /spark_listen box -->
-          <rect class="stroke" x="460" y="170" width="120" height="60" rx="6"/>
-          <text class="stage-label" x="520" y="195" text-anchor="middle">/spark_listen</text>
-          <text class="label-sub" x="520" y="212" text-anchor="middle">deep research</text>
+          <rect class="stroke" x="460" y="260" width="120" height="60" rx="6"/>
+          <text class="stage-label" x="520" y="285" text-anchor="middle">/spark_listen</text>
+          <text class="label-sub" x="520" y="302" text-anchor="middle">deep research</text>
 
           <!-- arrow from spark_listen to spark_script -->
-          <line class="stroke" x1="580" y1="200" x2="595" y2="200"/>
-          <polygon points="595,195 605,200 595,205" fill="#111"/>
+          <line class="stroke" x1="580" y1="290" x2="595" y2="290"/>
+          <polygon points="595,285 605,290 595,295" fill="#111"/>
 
           <!-- /spark_script box -->
-          <rect class="stroke" x="605" y="170" width="105" height="60" rx="6"/>
-          <text class="stage-label" x="657" y="195" text-anchor="middle">/spark_script</text>
-          <text class="label-sub" x="657" y="212" text-anchor="middle">5 variants</text>
+          <rect class="stroke" x="605" y="260" width="105" height="60" rx="6"/>
+          <text class="stage-label" x="657" y="285" text-anchor="middle">/spark_script</text>
+          <text class="label-sub" x="657" y="302" text-anchor="middle">5 variants</text>
 
           <!-- arrow down from /spark_script to production handoff -->
-          <line class="stroke" x1="657" y1="232" x2="657" y2="380"/>
-          <polygon points="652,380 657,390 662,380" fill="#111"/>
+          <line class="stroke" x1="657" y1="322" x2="657" y2="450"/>
+          <polygon points="652,450 657,460 662,450" fill="#111"/>
 
-          <!-- production handoff (at end of /spark_script, not /spark_idea) -->
-          <rect class="stroke" x="540" y="395" width="170" height="44" rx="6"/>
-          <text class="stage-label" x="625" y="421" text-anchor="middle">Production handoff</text>
-
-          <!-- caption under handoff -->
-          <text class="label-sub" x="625" y="453" text-anchor="middle">End of Sparkloop. Production owns from here.</text>
+          <!-- production handoff -->
+          <rect class="stroke" x="540" y="465" width="170" height="44" rx="6"/>
+          <text class="stage-label" x="625" y="491" text-anchor="middle">Production handoff</text>
         </svg>
       </div>
 
@@ -307,8 +312,11 @@
     <!-- 03 -->
     <section id="initiators">
       <div class="num">03</div>
-      <h2><span class="num-inline">03</span>The 8 initiators</h2>
-      <p>Any of these kicks off a Sparkloop run. They all feed the same downstream pipeline (<span class="skill-name">/spark_idea</span> → <span class="skill-name">/spark_listen</span> → <span class="skill-name">/spark_script</span>).</p>
+      <h2><span class="num-inline">03</span>Initiators</h2>
+      <p>Four entry points kick off a Sparkloop. Three are manual (you bring the input). The fourth (<span class="skill-name">/spark_scan</span>) is an automated radar that fans out across five signal sources and surfaces them in one dashboard.</p>
+      <p class="muted">All four feed the same downstream pipeline: <span class="skill-name">/spark_idea</span> → <span class="skill-name">/spark_listen</span> → <span class="skill-name">/spark_script</span>.</p>
+
+      <h3 style="margin-top: 28px;">Manual entry points</h3>
 
       <div class="initiators">
 
@@ -324,42 +332,6 @@
         <div class="initiator">
           <div class="initiator-num">02</div>
           <div class="initiator-body">
-            <h3 class="initiator-name">Viral talking points</h3>
-            <div class="initiator-skill">/viral_talking_points · existing</div>
-            <p class="initiator-desc">Research what your target audience is discussing right now on Reddit, X, and forums. Real engagement data, real quotes.</p>
-          </div>
-        </div>
-
-        <div class="initiator">
-          <div class="initiator-num">03</div>
-          <div class="initiator-body">
-            <h3 class="initiator-name">Monthly social listen</h3>
-            <div class="initiator-skill">/wf_monthly_listen · existing</div>
-            <p class="initiator-desc">Broader 90-day landscape scan across Reddit, X, Google Trends, TikTok, YouTube. Useful when you want the bigger picture rather than a single audience pulse.</p>
-          </div>
-        </div>
-
-        <div class="initiator">
-          <div class="initiator-num">04</div>
-          <div class="initiator-body">
-            <h3 class="initiator-name">Session + handoff scan</h3>
-            <div class="initiator-skill">/spark_scan · existing</div>
-            <p class="initiator-desc">Mine prior Claude sessions and handoff docs for unspent ideas over a configurable window. Cheap and fast: surface what we already produced but haven't acted on.</p>
-          </div>
-        </div>
-
-        <div class="initiator">
-          <div class="initiator-num">05</div>
-          <div class="initiator-body">
-            <h3 class="initiator-name">Performance-driven</h3>
-            <div class="initiator-skill">/spark_from_perf · planned wrapper around /watched + /boosted</div>
-            <p class="initiator-desc">Find what shipped in the last 90 days that over-performed, then spark variations on the winning patterns. Wraps existing performance data so the prompt input is "give me more like the winners."</p>
-          </div>
-        </div>
-
-        <div class="initiator">
-          <div class="initiator-num">06</div>
-          <div class="initiator-body">
             <h3 class="initiator-name">Audience-anchored</h3>
             <div class="initiator-skill">/spark_audience · new</div>
             <p class="initiator-desc">Pick one of the 4 primary WF audiences (operator_importer, operator_ecom, freelancer, 1688_buyer) and spark strictly for that audience's jobs-to-be-done. Different from viral talking points: that's "what they're saying"; this is "what we should be saying based on our audience research."</p>
@@ -367,23 +339,61 @@
         </div>
 
         <div class="initiator">
-          <div class="initiator-num">07</div>
+          <div class="initiator-num">03</div>
           <div class="initiator-body">
             <h3 class="initiator-name">Product / feature artefact</h3>
-            <div class="initiator-skill">/spark_product · wrapper around /wf_content_foundation</div>
+            <div class="initiator-skill">/spark_product · wraps /wf_content_foundation</div>
             <p class="initiator-desc">Drop a PRD excerpt, demo notes, feature launch announcement, or product team input. Routes through the existing content foundation skill, then into spark_idea for angle generation.</p>
           </div>
         </div>
 
+      </div>
+
+      <h3 style="margin-top: 32px;">Automated radar</h3>
+
+      <div class="initiators">
         <div class="initiator">
-          <div class="initiator-num">08</div>
+          <div class="initiator-num">04</div>
           <div class="initiator-body">
-            <h3 class="initiator-name">Industry pulse</h3>
-            <div class="initiator-skill">/spark_pulse · new</div>
-            <p class="initiator-desc">Payments and fintech-adjacent trends, filtered for what WorldFirst could plausibly speak to. Cross-border SME payments, supplier-side payment infra, AML/regulatory shifts, marketplace payout mechanics. Excludes generic competitor news (Wise IPO, Stripe acquires X) that doesn't translate into social.</p>
+            <h3 class="initiator-name">/spark_scan — automated radar</h3>
+            <div class="initiator-skill">/spark_scan · existing (expanded)</div>
+            <p class="initiator-desc">One skill that fires five signal sources in parallel and presents them in a single dashboard with five sub-sections. Each item has a "send to /spark_idea" button. Live mockup: <a href="https://socialworldfirst.github.io/spark-scan/" style="color: var(--fg); text-decoration: underline;">socialworldfirst.github.io/spark-scan</a></p>
+
+            <div style="margin-top: 14px; padding: 14px 16px; border: 1px solid var(--hairline); border-radius: 8px; background: var(--bg-paper);">
+              <div style="font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-soft); margin-bottom: 10px;">Five sources inside /spark_scan</div>
+
+              <div style="padding: 8px 0; border-top: 1px solid var(--hairline-soft);">
+                <div style="font-size: 14px; font-weight: 600;">Viral talking points</div>
+                <div style="font-family: var(--mono); font-size: 11px; color: var(--fg-soft); margin: 2px 0 4px;">wraps /viral_talking_points</div>
+                <div style="font-size: 12px; color: var(--fg-muted);">Real-time Reddit/X/forum engagement on selected audience topics, ranked by engagement velocity.</div>
+              </div>
+
+              <div style="padding: 8px 0; border-top: 1px solid var(--hairline-soft);">
+                <div style="font-size: 14px; font-weight: 600;">Monthly social listen</div>
+                <div style="font-family: var(--mono); font-size: 11px; color: var(--fg-soft); margin: 2px 0 4px;">wraps /wf_monthly_listen</div>
+                <div style="font-size: 12px; color: var(--fg-muted);">90-day landscape across Reddit, X, Google Trends, TikTok, YouTube. Cross-platform trending topics.</div>
+              </div>
+
+              <div style="padding: 8px 0; border-top: 1px solid var(--hairline-soft);">
+                <div style="font-size: 14px; font-weight: 600;">Session + handoff scan</div>
+                <div style="font-family: var(--mono); font-size: 11px; color: var(--fg-soft); margin: 2px 0 4px;">expanded from legacy /spark_scan</div>
+                <div style="font-size: 12px; color: var(--fg-muted);">Full session and handoff archive treated as artefact pool. Surfaces unspent talking points across all sessions, ranked by freshness × relevance.</div>
+              </div>
+
+              <div style="padding: 8px 0; border-top: 1px solid var(--hairline-soft);">
+                <div style="font-size: 14px; font-weight: 600;">Performance-driven</div>
+                <div style="font-family: var(--mono); font-size: 11px; color: var(--fg-soft); margin: 2px 0 4px;">wraps /watched + /boosted</div>
+                <div style="font-size: 12px; color: var(--fg-muted);">Top performers from last 90 days. Surfaces winning content so spark_idea can produce variations on what's already working.</div>
+              </div>
+
+              <div style="padding: 8px 0; border-top: 1px solid var(--hairline-soft);">
+                <div style="font-size: 14px; font-weight: 600;">Industry pulse</div>
+                <div style="font-family: var(--mono); font-size: 11px; color: var(--fg-soft); margin: 2px 0 4px;">new</div>
+                <div style="font-size: 12px; color: var(--fg-muted);">Payments + fintech-adjacent trends, filtered for WorldFirst relevance. Excludes generic competitor news (Wise IPO, Stripe acquires X) that doesn't translate to social.</div>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -471,82 +481,118 @@
       <div class="status-grid">
         <div class="status-row">
           <div class="status-cell">
-            <div class="status-label">Initiator 01</div>
+            <div class="status-label">Entry point 01</div>
             <div class="status-skill">/wf_spark</div>
             <div class="status-detail">Drop any artefact</div>
           </div>
           <div class="status-cell">
-            <div class="status-label">Initiator 02</div>
+            <div class="status-label">Inside /spark_scan</div>
             <div class="status-skill">/viral_talking_points</div>
             <div class="status-detail">Audience pulse on Reddit + X</div>
           </div>
         </div>
         <div class="status-row">
           <div class="status-cell">
-            <div class="status-label">Initiator 03</div>
+            <div class="status-label">Inside /spark_scan</div>
             <div class="status-skill">/wf_monthly_listen</div>
             <div class="status-detail">90-day landscape</div>
           </div>
           <div class="status-cell">
-            <div class="status-label">Initiator 04</div>
-            <div class="status-skill">/spark_scan</div>
-            <div class="status-detail">Mine prior sessions</div>
+            <div class="status-label">Inside /spark_scan</div>
+            <div class="status-skill">/spark_scan (legacy)</div>
+            <div class="status-detail">Session + handoff scan — to expand for full archive</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Inside /spark_scan</div>
+            <div class="status-skill">/watched + /boosted</div>
+            <div class="status-detail">Performance data source for the radar</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Wraps for refinement</div>
+            <div class="status-skill">/wf_focused_listen</div>
+            <div class="status-detail">Rename + scope as /spark_listen</div>
           </div>
         </div>
         <div class="status-row">
           <div class="status-cell">
             <div class="status-label">Brainstorm loop</div>
             <div class="status-skill">/spark</div>
-            <div class="status-detail">Built. Reference: SEA v4</div>
+            <div class="status-detail">Built. Reference: SEA v4 · 30 banked</div>
           </div>
           <div class="status-cell">
-            <div class="status-label">Deep research</div>
-            <div class="status-skill">/wf_focused_listen</div>
-            <div class="status-detail">Wrap as /spark_listen</div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Wrappers to build</h3>
-      <div class="status-grid">
-        <div class="status-row">
-          <div class="status-cell">
-            <div class="status-label">Initiator 05</div>
-            <div class="status-skill">/spark_from_perf</div>
-            <div class="status-detail">Wraps /watched + /boosted</div>
-          </div>
-          <div class="status-cell">
-            <div class="status-label">Initiator 07</div>
-            <div class="status-skill">/spark_product</div>
-            <div class="status-detail">Wraps /wf_content_foundation</div>
+            <div class="status-label">Product input wrap</div>
+            <div class="status-skill">/wf_content_foundation</div>
+            <div class="status-detail">Wraps as /spark_product</div>
           </div>
         </div>
       </div>
 
-      <h3>New skills to build</h3>
+      <h3>To build or wrap</h3>
       <div class="status-grid">
         <div class="status-row">
           <div class="status-cell">
-            <div class="status-label">Initiator 06</div>
+            <div class="status-label">Entry point 02 (new)</div>
             <div class="status-skill">/spark_audience</div>
             <div class="status-detail">Audience-anchored spark</div>
           </div>
           <div class="status-cell">
-            <div class="status-label">Initiator 08</div>
+            <div class="status-label">Entry point 03 (wrap)</div>
+            <div class="status-skill">/spark_product</div>
+            <div class="status-detail">Wraps /wf_content_foundation</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Entry point 04 (expand)</div>
+            <div class="status-skill">/spark_scan</div>
+            <div class="status-detail">Unified radar wrapping 5 sub-sources, single dashboard. v0 UI mockup live.</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Inside /spark_scan (new)</div>
             <div class="status-skill">/spark_pulse</div>
             <div class="status-detail">Fintech-adjacent industry listen</div>
           </div>
         </div>
         <div class="status-row">
           <div class="status-cell">
-            <div class="status-label">Refinement</div>
+            <div class="status-label">Refinement (rename)</div>
             <div class="status-skill">/spark_listen</div>
-            <div class="status-detail">Rename + scope /wf_focused_listen for the family</div>
+            <div class="status-detail">Wraps /wf_focused_listen for the spark family. Batches angles into topical research themes.</div>
           </div>
           <div class="status-cell">
-            <div class="status-label">Output</div>
+            <div class="status-label">Output (new)</div>
             <div class="status-skill">/spark_script</div>
-            <div class="status-detail">5 variants per piece</div>
+            <div class="status-detail">5 script variants per piece. Produces production handoff at terminal.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Live URLs</h3>
+      <div class="status-grid">
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Sparkloop explainer</div>
+            <div class="status-skill">socialworldfirst.github.io/sparkloop</div>
+            <div class="status-detail">This page</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">/spark_scan v0 mockup</div>
+            <div class="status-skill">socialworldfirst.github.io/spark-scan</div>
+            <div class="status-detail">5-source radar UI</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="status-cell">
+            <div class="status-label">Reference run /spark_idea</div>
+            <div class="status-skill">socialworldfirst.github.io/sea-brainstorm</div>
+            <div class="status-detail">SEA brand channel · v4 wrap state</div>
+          </div>
+          <div class="status-cell">
+            <div class="status-label">Reference run /spark_script</div>
+            <div class="status-skill">socialworldfirst.github.io/spark-script-pick</div>
+            <div class="status-detail">SEA · 30 pieces · direction picker</div>
           </div>
         </div>
       </div>
