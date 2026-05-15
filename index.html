@@ -184,9 +184,11 @@
       <a href="#initiators"><span class="toc-num">03</span>Initiators</a>
       <a href="#idea"><span class="toc-num">04</span>Spark_idea</a>
       <a href="#listen"><span class="toc-num">05</span>Spark_listen</a>
-      <a href="#script"><span class="toc-num">06</span>Spark_script</a>
-      <a href="#not"><span class="toc-num">07</span>What it isn't</a>
-      <a href="#build"><span class="toc-num">08</span>Build status</a>
+      <a href="#produce"><span class="toc-num">06</span>Spark_produce</a>
+      <a href="#script"><span class="toc-num">07</span>Spark_script</a>
+      <a href="#critique"><span class="toc-num">08</span>Spark_critique</a>
+      <a href="#not"><span class="toc-num">09</span>What it isn't</a>
+      <a href="#build"><span class="toc-num">10</span>Build status</a>
     </nav>
   </aside>
 
@@ -222,15 +224,17 @@
     <section id="flow">
       <div class="num">02</div>
       <h2><span class="num-inline">02</span>The flow at a glance</h2>
-      <p>Four entry skills feed into <span class="skill-name">/spark_idea</span>. Three are manual; one (<span class="skill-name">/spark_scan</span>) is an automated radar that fans out across five signal sources. Iteration runs until banked outweighs iterating. Wrap hands off to <span class="skill-name">/spark_listen</span> for topical research, then to <span class="skill-name">/spark_script</span> for production-ready scripts.</p>
+      <p>Four entry skills feed into <span class="skill-name">/spark_idea</span>. Three are manual; one (<span class="skill-name">/spark_scan</span>) is an automated radar that fans out across five signal sources. Iteration runs until banked outweighs iterating. Wrap hands off to <span class="skill-name">/spark_listen</span> (research), <span class="skill-name">/spark_produce</span> (production cards), <span class="skill-name">/spark_script</span> (VO scripts), and finally <span class="skill-name">/spark_critique</span> (brand-polish + skeptic test + Heat rating) before production handoff.</p>
 
       <div class="diagram-wrap">
-        <svg class="diagram" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
+        <svg class="diagram" viewBox="0 0 920 540" xmlns="http://www.w3.org/2000/svg">
           <!-- column labels -->
           <text class="col-label" x="60" y="22">ENTRY POINTS</text>
           <text class="col-label" x="290" y="22">ITERATION</text>
-          <text class="col-label" x="470" y="22">REFINEMENT</text>
-          <text class="col-label" x="600" y="22">OUTPUT</text>
+          <text class="col-label" x="430" y="22">RESEARCH</text>
+          <text class="col-label" x="555" y="22">PRODUCTION</text>
+          <text class="col-label" x="700" y="22">DRAFT</text>
+          <text class="col-label" x="830" y="22">CRITIQUE</text>
 
           <!-- 3 manual entry points (top) -->
           <g>
@@ -267,42 +271,64 @@
           <!-- converging lines from entry points to /spark_idea -->
           <g class="stroke-soft">
             <path d="M210 60 Q 240 60 270 270" />
-            <path d="M210 105 Q 240 105 270 275" />
-            <path d="M210 150 Q 240 150 270 280" />
-            <path d="M220 295 Q 250 295 270 290" />
+            <path d="M210 105 Q 240 105 270 280" />
+            <path d="M210 150 Q 240 150 270 290" />
+            <path d="M220 295 Q 250 295 270 295" />
           </g>
 
           <!-- /spark_idea box -->
-          <rect class="stroke" x="270" y="245" width="140" height="90" rx="6"/>
-          <text class="stage-label" x="340" y="280" text-anchor="middle">/spark_idea</text>
-          <text class="label-sub" x="340" y="298" text-anchor="middle">brainstorm + iterate</text>
-          <text class="label-sub" x="340" y="314" text-anchor="middle">v1 → v(n) → wrap</text>
+          <rect class="stroke" x="270" y="245" width="130" height="90" rx="6"/>
+          <text class="stage-label" x="335" y="280" text-anchor="middle">/spark_idea</text>
+          <text class="label-sub" x="335" y="298" text-anchor="middle">brainstorm + iterate</text>
+          <text class="label-sub" x="335" y="314" text-anchor="middle">v1 → v(n) → wrap</text>
 
           <!-- arrow from spark_idea to spark_listen -->
-          <line class="stroke" x1="410" y1="290" x2="450" y2="290"/>
-          <polygon points="450,285 460,290 450,295" fill="#111"/>
+          <line class="stroke" x1="400" y1="290" x2="415" y2="290"/>
+          <polygon points="415,285 425,290 415,295" fill="#111"/>
 
           <!-- /spark_listen box -->
-          <rect class="stroke" x="460" y="260" width="120" height="60" rx="6"/>
-          <text class="stage-label" x="520" y="285" text-anchor="middle">/spark_listen</text>
-          <text class="label-sub" x="520" y="302" text-anchor="middle">deep research</text>
+          <rect class="stroke" x="425" y="260" width="110" height="60" rx="6"/>
+          <text class="stage-label" x="480" y="285" text-anchor="middle">/spark_listen</text>
+          <text class="label-sub" x="480" y="302" text-anchor="middle">deep research</text>
 
-          <!-- arrow from spark_listen to spark_script -->
-          <line class="stroke" x1="580" y1="290" x2="595" y2="290"/>
-          <polygon points="595,285 605,290 595,295" fill="#111"/>
+          <!-- arrow from spark_listen to spark_produce -->
+          <line class="stroke" x1="535" y1="290" x2="550" y2="290"/>
+          <polygon points="550,285 560,290 550,295" fill="#111"/>
+
+          <!-- /spark_produce box -->
+          <rect class="stroke" x="560" y="260" width="115" height="60" rx="6"/>
+          <text class="stage-label" x="617" y="285" text-anchor="middle">/spark_produce</text>
+          <text class="label-sub" x="617" y="302" text-anchor="middle">production cards</text>
+
+          <!-- arrow from spark_produce to spark_script -->
+          <line class="stroke" x1="675" y1="290" x2="690" y2="290"/>
+          <polygon points="690,285 700,290 690,295" fill="#111"/>
 
           <!-- /spark_script box -->
-          <rect class="stroke" x="605" y="260" width="105" height="60" rx="6"/>
-          <text class="stage-label" x="657" y="285" text-anchor="middle">/spark_script</text>
-          <text class="label-sub" x="657" y="302" text-anchor="middle">5 variants</text>
+          <rect class="stroke" x="700" y="260" width="105" height="60" rx="6"/>
+          <text class="stage-label" x="752" y="285" text-anchor="middle">/spark_script</text>
+          <text class="label-sub" x="752" y="302" text-anchor="middle">VO scripts</text>
 
-          <!-- arrow down from /spark_script to production handoff -->
-          <line class="stroke" x1="657" y1="322" x2="657" y2="450"/>
-          <polygon points="652,450 657,460 662,450" fill="#111"/>
+          <!-- arrow from spark_script to spark_critique -->
+          <line class="stroke" x1="805" y1="290" x2="820" y2="290"/>
+          <polygon points="820,285 830,290 820,295" fill="#111"/>
+
+          <!-- /spark_critique box (highlighted as new) -->
+          <rect class="stroke" x="830" y="260" width="80" height="60" rx="6" fill="rgba(10,109,47,0.06)" stroke-width="1.5"/>
+          <text class="stage-label" x="870" y="280" text-anchor="middle">/spark_critique</text>
+          <text class="label-sub" x="870" y="297" text-anchor="middle">brand-polish</text>
+          <text class="label-sub" x="870" y="311" text-anchor="middle">+ skeptic-test</text>
+
+          <!-- new badge near critique -->
+          <text x="870" y="340" text-anchor="middle" style="font-size: 9px; fill: #0a6d2f; font-family: ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;">NEW</text>
+
+          <!-- arrow down from /spark_critique to production handoff -->
+          <line class="stroke" x1="870" y1="350" x2="870" y2="475"/>
+          <polygon points="865,475 870,485 875,475" fill="#111"/>
 
           <!-- production handoff -->
-          <rect class="stroke" x="540" y="465" width="170" height="44" rx="6"/>
-          <text class="stage-label" x="625" y="491" text-anchor="middle">Production handoff</text>
+          <rect class="stroke" x="770" y="490" width="200" height="40" rx="6"/>
+          <text class="stage-label" x="870" y="514" text-anchor="middle">Production handoff</text>
         </svg>
       </div>
 
@@ -314,7 +340,7 @@
       <div class="num">03</div>
       <h2><span class="num-inline">03</span>Initiators</h2>
       <p>Four entry points kick off a Sparkloop. Three are manual (you bring the input). The fourth (<span class="skill-name">/spark_scan</span>) is an automated radar that fans out across five signal sources and surfaces them in one dashboard.</p>
-      <p class="muted">All four feed the same downstream pipeline: <span class="skill-name">/spark_idea</span> → <span class="skill-name">/spark_listen</span> → <span class="skill-name">/spark_script</span>.</p>
+      <p class="muted">All four feed the same downstream pipeline: <span class="skill-name">/spark_idea</span> → <span class="skill-name">/spark_listen</span> → <span class="skill-name">/spark_produce</span> → <span class="skill-name">/spark_script</span> → <span class="skill-name">/spark_critique</span>.</p>
 
       <h3 style="margin-top: 28px;">Manual entry points</h3>
 
@@ -434,32 +460,54 @@
       <p class="muted">Example (SEA batch): 30 angles clustered into 7 themes — CNY rails, FX margin, wire rejection, paying-in-CNY economics, personal-vs-business tools, WF product mechanics, switch-point math. Seven research runs, not thirty.</p>
 
       <h3>Output</h3>
-      <p>One brief per theme. Statistics, case studies, authority quotes, real-world examples. Feeds <span class="skill-name">/spark_script</span> with the evidence-base it needs to write scripts that ground in facts rather than fabricated framing.</p>
+      <p>One brief per theme. Statistics, case studies, authority quotes, real-world examples. Feeds <span class="skill-name">/spark_produce</span> with the evidence-base it needs to assemble production cards.</p>
     </section>
 
     <!-- 06 -->
-    <section id="script">
+    <section id="produce">
       <div class="num">06</div>
-      <h2><span class="num-inline">06</span>Spark_script — script generation</h2>
-      <p>Future stage. For each banked piece, produces five distinct script variants. The page shows variant 1 by default; a dropdown reveals variants 2-5 for alternatives.</p>
+      <h2><span class="num-inline">06</span>Spark_produce — production cards</h2>
+      <p>Bridge between research and scripts. Takes the picked angles from <span class="skill-name">/spark_idea</span> + the research briefs from <span class="skill-name">/spark_listen</span> and assembles a production cards page: one card per video, each card carries hook variants, mini-script, research findings, and rating chips. Human picks angles + drops comments via the page. The paste-back routes to <span class="skill-name">/spark_script</span>.</p>
 
-      <h3>Variants vary by format</h3>
-      <ul>
-        <li><strong>Long-form</strong> — 5 structural directions (sequential, problem-led, day-in-life, cost-decomposition, question-led)</li>
-        <li><strong>Short-form</strong> — 5 hook + body combinations using different psychological levers</li>
-        <li><strong>KOL angle</strong> — 5 distribution framings (standalone math, co-branded carousel, native deep dive, customer conversation, LinkedIn longform)</li>
-      </ul>
-
-      <p>Hands off to <span class="skill-name">/wf_yt_script</span>, <span class="skill-name">/new_reel_scripts_x5_v1</span>, and <span class="skill-name">/wf_quick_reel</span> for final voiceover-ready scripts.</p>
-
-      <h3>End of Sparkloop</h3>
-      <p>When scripts are confirmed, <span class="skill-name">/spark_script</span> produces the <strong>production handoff doc</strong>. That is the terminal deliverable of Sparkloop. Talent booking, studio scheduling, calendar slotting, and posting all happen downstream and outside Sparkloop.</p>
+      <p class="muted">Reference impl: <a href="https://socialworldfirst.github.io/sea-production/" style="color: var(--fg); text-decoration: underline;">socialworldfirst.github.io/sea-production</a></p>
     </section>
 
     <!-- 07 -->
-    <section id="not">
+    <section id="script">
       <div class="num">07</div>
-      <h2><span class="num-inline">07</span>What Sparkloop isn't</h2>
+      <h2><span class="num-inline">07</span>Spark_script — script generation</h2>
+      <p>Takes picks paste-back from <span class="skill-name">/spark_produce</span>. Expands each picked angle into pure-VO copy grounded in research findings already attached upstream. Pure spoken VO, no timing markers, no shot direction. Outputs Google Doc or HTML page per project. Same format philosophy as <span class="skill-name">/wf_reel_script_human_remix</span>.</p>
+
+      <p class="muted">Reference impl: <a href="https://socialworldfirst.github.io/sea-vo-scripts/" style="color: var(--fg); text-decoration: underline;">socialworldfirst.github.io/sea-vo-scripts</a></p>
+    </section>
+
+    <!-- 08 -->
+    <section id="critique">
+      <div class="num">08</div>
+      <h2><span class="num-inline">08</span>Spark_critique — brand-polish + skeptic test + Heat rating</h2>
+      <p>The final stage before production handoff. Takes draft scripts and runs them through three lenses in parallel:</p>
+
+      <ul>
+        <li><strong>Voice variants</strong> — produces 5+ variants per script using known scripting frameworks (Hormozi PAS, Gary Vee opinion-led, etc.) for direct side-by-side comparison</li>
+        <li><strong>Brand-polish iteration</strong> — surgical strikethrough + insertion edits dialling down American gym-bro CTAs and confrontational verbs while preserving value density and founder cadence</li>
+        <li><strong>Skeptic-test (Heat metric)</strong> — Malaysian SMB audience proxy reads each script and leaves 5 honest comments. Each comment tagged severity (high/mid/low). The script gets an overall Heat rating (Low/Med/High) capturing trust-breaking risk: cooked math, unverifiable absolutes, scare framing, missing regulation anchor</li>
+      </ul>
+
+      <p>Output: ranked scripts with Claude rating + Heat metric + skeptic-comment severity. Human picks the deployable winner.</p>
+
+      <p class="muted">Reference impl: <a href="https://socialworldfirst.github.io/sea-voice-iterate/" style="color: var(--fg); text-decoration: underline;">socialworldfirst.github.io/sea-voice-iterate</a></p>
+
+      <h3>Why this is its own stage</h3>
+      <p>Without /spark_critique, scripts ship blind. They might read fine to the writer but feel fake or trust-breaking to the actual audience. The Heat metric catches the things that survive contact with a skeptical viewer: "where does the 2.5% come from?", "who is WorldFirst, got Malaysia license?", "sounds like ad". This is the difference between a script that gets ignored and one that triggers a brand search.</p>
+
+      <h3>End of Sparkloop</h3>
+      <p>When the winner is picked from /spark_critique, the production handoff doc is finalised. That is the terminal deliverable. Talent booking, studio scheduling, calendar slotting, and posting all happen downstream and outside Sparkloop.</p>
+    </section>
+
+    <!-- 09 -->
+    <section id="not">
+      <div class="num">09</div>
+      <h2><span class="num-inline">09</span>What Sparkloop isn't</h2>
       <p>Sparkloop is the angle-discovery and selection layer. Everything downstream is a separate skill.</p>
       <ul>
         <li>Doesn't write final voiceover scripts — handoff to <span class="skill-name">/wf_yt_script</span>, <span class="skill-name">/new_reel_scripts_x5_v1</span>, <span class="skill-name">/wf_quick_reel</span></li>
@@ -472,10 +520,10 @@
       <p class="muted">The output of Sparkloop is locked-in angles and script variants. Production owns the rest.</p>
     </section>
 
-    <!-- 08 -->
+    <!-- 10 -->
     <section id="build">
-      <div class="num">08</div>
-      <h2><span class="num-inline">08</span>Build status</h2>
+      <div class="num">10</div>
+      <h2><span class="num-inline">10</span>Build status</h2>
 
       <h3>Existing skills (plug in as-is)</h3>
       <div class="status-grid">
